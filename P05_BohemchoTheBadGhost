@@ -1,0 +1,49 @@
+using System;
+using System.Linq;
+
+class BohemchoTheBadGhost
+{
+    static void Main()
+    {
+        int on = 0;
+        long score = 0;
+
+        string line = Console.ReadLine();
+        while (!line.Equals("Stop, God damn it"))
+        {
+            uint floor = uint.Parse(line);
+            string bin = Convert.ToString(floor, 2).PadLeft(32, '0');
+            char[] binChar = bin.ToCharArray();
+
+            int[] apartments = Console.ReadLine().Split().Select(x => int.Parse(x)).ToArray();
+
+            foreach (int i in apartments)
+            {
+                if (binChar[binChar.Length - 1 - i] == '0')
+                {
+                    binChar[binChar.Length - 1 - i] = '1';
+                }
+                else
+                {
+                    binChar[binChar.Length - 1 - i] = '0';
+                }
+            }
+
+            foreach(char c in binChar)
+            {
+                if (c == '1')
+                {
+                    on ++;
+                }
+            }
+
+            bin = new string(binChar);
+            floor = Convert.ToUInt32(bin, 2);
+            score += floor;
+
+            line = Console.ReadLine();
+        }
+
+        Console.WriteLine("Bohemcho left {0} lights on and his score is {1}", on, score);
+    }
+}
