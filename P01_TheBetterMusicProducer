@@ -1,0 +1,36 @@
+using System;
+
+class TheBetterMusicProducer
+{
+    static void Main()
+    {
+        int nEUR = int.Parse(Console.ReadLine());
+        decimal priceEUR = decimal.Parse(Console.ReadLine()) * 1.94m;
+        int nUSD = int.Parse(Console.ReadLine());
+        decimal priceUSD = decimal.Parse(Console.ReadLine()) * 1.72m;
+        int nPES = int.Parse(Console.ReadLine());
+        decimal pricePES = decimal.Parse(Console.ReadLine()) / 332.74m;
+        int nConcerts = int.Parse(Console.ReadLine());
+        decimal profitConcert = decimal.Parse(Console.ReadLine()) * 1.94m;
+
+        decimal totalAlbums = nEUR * priceEUR + nUSD * priceUSD + nPES * pricePES;
+        totalAlbums = totalAlbums - totalAlbums * 0.35m;
+        totalAlbums = totalAlbums - totalAlbums * 0.2m;
+
+        decimal totalConcerts = nConcerts * profitConcert;
+
+        if (totalConcerts > 100000m)
+        {
+            totalConcerts = totalConcerts - totalConcerts * 0.15m;
+        }
+
+        if (totalAlbums > totalConcerts)
+        {
+            Console.WriteLine("Let's record some songs! They'll bring us {0:F2}lv.", totalAlbums);
+        }
+        else
+        {
+            Console.WriteLine("On the road again! We'll see the world and earn {0:F2}lv.", totalConcerts);
+        }
+    }
+}
