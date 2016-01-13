@@ -1,0 +1,57 @@
+using System;
+
+class BohemchoTheBadGhost
+{
+    static void Main()
+    {
+        long result = 0;
+        long count = 0;
+
+        string line = Console.ReadLine();
+        //line != "Stop, God damn it"
+        while(!line.Equals("Stop, God damn it"))
+        {
+            uint floor = uint.Parse(line);
+            string floorBIN = Convert.ToString(floor, 2).PadLeft(32, '0');
+            char[] bin = floorBIN.ToCharArray();
+
+            string[] appartments = Console.ReadLine().Split(' ');
+            int[] app = new int[appartments.Length];
+
+            for(int i = 0; i < appartments.Length; i++)
+            {
+                app[i] = int.Parse(appartments[i]);
+            }
+
+            for (int i = 0; i < app.Length; i++)
+            {
+                int index = 31 - app[i];
+                if (bin[index] == '0')
+                {
+                    bin[index] = '1';
+                }
+                else
+                {
+                    bin[index] = '0';
+                }
+            }
+
+            for (int i = 0; i < bin.Length; i++)
+            {
+                if (bin[i] == '1')
+                {
+                    count += 1;
+                }
+            }
+
+            floorBIN = new string(bin);
+            floor = Convert.ToUInt32(floorBIN, 2);
+            result += floor;
+
+            line = Console.ReadLine();
+        }
+
+        Console.WriteLine("Bohemcho left {0} lights on and his score is {1}",
+            count, result);
+    }
+}
